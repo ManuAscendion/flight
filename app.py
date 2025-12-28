@@ -38,7 +38,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 load_dotenv()
 AVIATION_KEY = os.getenv("AVIATIONSTACK_API_KEY", "").strip()
  
-APP = Flask(__name__, static_folder="static", template_folder="templates")
+app = Flask(__name__, static_folder="static", template_folder="templates")
  
 # Default test callsigns (hardcoded - change in UI or here)
  
@@ -190,12 +190,12 @@ def fetch_aviationstack_for_iata(iata_code: str):
 # ----------------------------
 # Routes
 # ----------------------------
-@APP.route("/")
+@app.route("/")
 def index():
     return render_template("index.html")
  
  
-@APP.route("/api/flights")
+@app.route("/api/flights")
 def api_flights():
     """
     Query ?callsigns=AAL8,DAL2966 or use defaults.
@@ -272,5 +272,5 @@ def api_flights():
 if __name__ == "__main__":
     print("Starting Hybrid Flight Tracker (AviationStack + OpenSky)")
     print("Open browser: http://127.0.0.1:5000")
-    APP.run(debug=True, port=5000)
+    app.run(debug=True, port=5000)
  
